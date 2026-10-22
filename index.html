@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f8f7">
+  <meta name="description" content="Meet Vefrix, the smart expense and daily diary tracker for your everyday money. Download the Android app.">
+  <title>Vefrix — Smart Expense &amp; Daily Diary Tracker</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --red: #e52c35;
+      --red-dark: #bd2029;
+      --ink: #17191d;
+      --muted: #6b7079;
+      --paper: #f8f8f7;
+      --white: #fff;
+      --line: #e9e9e7;
+      --green: #27845c;
+      --shadow: 0 24px 70px rgba(28, 25, 25, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+    .site-header { padding: 22px 0; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-size: 19px; font-weight: 850; letter-spacing: -.7px; }
+    .brand-mark {
+      display: grid; width: 38px; height: 38px; place-items: center; border-radius: 12px;
+      background: var(--red); color: white; box-shadow: 0 7px 16px rgba(229, 44, 53, .22);
+    }
+    .brand-mark svg { width: 22px; height: 22px; }
+    .nav-links { display: flex; align-items: center; gap: 30px; color: #50545b; font-size: 14px; font-weight: 600; }
+    .nav-links a { text-decoration: none; transition: color .2s ease; }
+    .nav-links a:hover { color: var(--red); }
+    .nav-cta { padding: 11px 17px; border: 1px solid #dededc; border-radius: 999px; color: var(--ink) !important; }
+
+    .hero { position: relative; overflow: hidden; padding: 67px 0 88px; }
+    .hero::before {
+      position: absolute; z-index: -1; top: -170px; right: -130px; width: 700px; height: 700px;
+      border-radius: 50%; background: radial-gradient(circle, rgba(229, 44, 53, .10), rgba(229, 44, 53, 0) 68%);
+      content: "";
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 46px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; margin: 0 0 20px; padding: 8px 12px;
+      border: 1px solid #f1d7d8; border-radius: 99px; background: #fff8f8; color: var(--red-dark);
+      font-size: 12px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 4px #fbe5e6; }
+    h1 { max-width: 650px; margin: 0; font-size: clamp(42px, 5.5vw, 68px); line-height: 1.04; letter-spacing: -.065em; }
+    h1 span { color: var(--red); }
+    .hero-copy { max-width: 540px; margin: 22px 0 0; color: var(--muted); font-size: 17px; line-height: 1.75; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 15px; margin-top: 30px; }
+    .button {
+      display: inline-flex; min-height: 56px; align-items: center; justify-content: center; gap: 11px;
+      padding: 0 22px; border: 0; border-radius: 14px; background: var(--red); color: var(--white);
+      box-shadow: 0 12px 25px rgba(229, 44, 53, .24); font-size: 15px; font-weight: 750;
+      text-decoration: none; transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); background: var(--red-dark); box-shadow: 0 16px 30px rgba(229, 44, 53, .29); }
+    .button:focus-visible, a:focus-visible { outline: 3px solid #f09ba0; outline-offset: 4px; }
+    .button svg { width: 20px; height: 20px; }
+    .trust-note { display: flex; align-items: center; gap: 8px; color: #74777d; font-size: 13px; font-weight: 550; }
+    .trust-note svg { width: 17px; height: 17px; color: var(--green); }
+    .hero-points { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 28px; color: #555a62; font-size: 13px; font-weight: 650; }
+    .hero-points span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-points svg { width: 16px; height: 16px; color: var(--red); }
+
+    .visual { position: relative; display: grid; min-height: 460px; place-items: center; }
+    .visual-glow { position: absolute; width: 340px; height: 340px; border-radius: 50%; background: #f9dfe0; filter: blur(2px); }
+    .phone {
+      position: relative; z-index: 1; width: 282px; min-height: 446px; padding: 11px;
+      border: 1px solid rgba(255,255,255,.9); border-radius: 38px; background: #17191d;
+      box-shadow: 0 30px 75px rgba(31, 27, 28, .22); transform: rotate(3deg);
+    }
+    .phone-screen { min-height: 424px; overflow: hidden; padding: 22px 17px 17px; border-radius: 29px; background: #fbfbfa; }
+    .phone-top { display: flex; align-items: center; justify-content: space-between; color: #202127; font-size: 13px; font-weight: 800; }
+    .phone-avatar { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 50%; background: #fce8e9; color: var(--red); font-size: 12px; }
+    .balance-card { margin-top: 22px; padding: 18px; border-radius: 19px; background: var(--red); color: white; }
+    .balance-label { opacity: .84; font-size: 11px; font-weight: 600; }
+    .balance-value { margin-top: 5px; font-size: 30px; font-weight: 820; letter-spacing: -1.5px; }
+    .balance-bottom { display: flex; justify-content: space-between; margin-top: 15px; font-size: 10px; opacity: .91; }
+    .mini-heading { display: flex; align-items: center; justify-content: space-between; margin: 20px 2px 10px; font-size: 12px; font-weight: 800; }
+    .mini-heading span:last-child { color: var(--red); font-size: 10px; }
+    .transaction { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #eee; }
+    .tx-icon { display: grid; width: 34px; height: 34px; flex: 0 0 34px; place-items: center; border-radius: 11px; background: #fff0e7; color: #cb6a2b; font-size: 15px; }
+    .tx-icon.green { background: #e8f5ee; color: #35845e; }
+    .tx-info { min-width: 0; flex: 1; }
+    .tx-info strong, .tx-info small { display: block; }
+    .tx-info strong { font-size: 10px; }
+    .tx-info small { margin-top: 3px; color: #92959a; font-size: 9px; }
+    .tx-amount { font-size: 10px; font-weight: 800; }
+    .phone-nav { display: flex; justify-content: space-around; margin-top: 16px; color: #8e9197; font-size: 8px; font-weight: 650; }
+    .phone-nav .active { color: var(--red); }
+    .float-card { position: absolute; z-index: 2; display: flex; align-items: center; gap: 10px; padding: 12px 15px; border: 1px solid rgba(255,255,255,.9); border-radius: 15px; background: white; box-shadow: 0 15px 35px rgba(28, 25, 25, .12); }
+    .float-card.one { top: 62px; left: -8px; }
+    .float-card.two { right: -7px; bottom: 65px; }
+    .float-icon { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 11px; background: #fff0f0; color: var(--red); font-size: 17px; }
+    .float-text strong, .float-text small { display: block; }
+    .float-text strong { font-size: 11px; }
+    .float-text small { margin-top: 3px; color: #8a8d93; font-size: 9px; }
+
+    .section { padding: 82px 0; }
+    .section-head { max-width: 650px; margin: 0 auto 38px; text-align: center; }
+    .section-kicker { margin: 0 0 10px; color: var(--red); font-size: 12px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    h2 { margin: 0; font-size: clamp(30px, 4vw, 43px); line-height: 1.15; letter-spacing: -.045em; }
+    .section-head > p:last-child { margin: 14px 0 0; color: var(--muted); line-height: 1.7; }
+    .features { background: white; }
+    .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .feature-card { min-height: 222px; padding: 23px 21px; border: 1px solid var(--line); border-radius: 20px; background: #fff; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .feature-card:hover { transform: translateY(-5px); border-color: #f0c3c5; box-shadow: 0 16px 35px rgba(31, 27, 28, .07); }
+    .feature-icon { display: grid; width: 48px; height: 48px; place-items: center; border-radius: 15px; background: #fff0f0; color: var(--red); }
+    .feature-icon svg { width: 23px; height: 23px; }
+    .feature-card h3 { margin: 19px 0 9px; font-size: 16px; line-height: 1.35; letter-spacing: -.02em; }
+    .feature-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+
+    .install { padding: 82px 0 92px; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .step { position: relative; padding: 25px 24px; border: 1px solid var(--line); border-radius: 19px; background: white; }
+    .step-number { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 12px; background: var(--ink); color: white; font-size: 14px; font-weight: 800; }
+    .step h3 { margin: 18px 0 7px; font-size: 17px; letter-spacing: -.025em; }
+    .step p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .download-band { display: flex; align-items: center; justify-content: space-between; gap: 28px; margin-top: 54px; padding: 34px 38px; border-radius: 24px; background: var(--ink); color: white; }
+    .download-band h2 { font-size: clamp(25px, 3vw, 34px); }
+    .download-band p { margin: 10px 0 0; color: #b9bbc0; font-size: 14px; }
+    .download-band .button { flex: 0 0 auto; }
+    footer { padding: 24px 0; border-top: 1px solid var(--line); color: #858890; font-size: 12px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .footer-brand { color: var(--ink); font-weight: 800; }
+
+    @media (max-width: 900px) {
+      .hero { padding-top: 48px; }
+      .hero-grid { grid-template-columns: 1fr .85fr; gap: 20px; }
+      .visual { transform: scale(.92); }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 680px) {
+      .wrap { width: min(100% - 36px, 520px); }
+      .site-header { padding: 16px 0; }
+      .nav-links { gap: 0; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .nav-cta { padding: 9px 13px; font-size: 12px; }
+      .hero { padding: 43px 0 56px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 18px; }
+      .hero-copy { font-size: 15px; }
+      .hero-actions { align-items: flex-start; flex-direction: column; }
+      .button { width: 100%; }
+      .visual { min-height: 420px; margin: 0 -12px; transform: scale(.88); }
+      .float-card.one { left: 1px; }
+      .float-card.two { right: 0; }
+      .section, .install { padding: 62px 0; }
+      .feature-grid { gap: 11px; }
+      .feature-card { min-height: 218px; padding: 18px 15px; }
+      .feature-card h3 { font-size: 14px; }
+      .feature-card p { font-size: 12px; }
+      .steps { grid-template-columns: 1fr; gap: 12px; }
+      .step { padding: 20px; }
+      .step h3 { margin-top: 13px; }
+      .download-band { align-items: stretch; flex-direction: column; margin-top: 35px; padding: 27px 22px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 380px) {
+      .wrap { width: calc(100% - 28px); }
+      h1 { font-size: 39px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature-card { min-height: auto; }
+      .feature-card h3 { font-size: 16px; }
+      .visual { margin: 0 -25px; transform: scale(.78); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#" aria-label="Vefrix home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 6.5 10.1 18h3.8L19 6.5h-4.2L12 13.7 9.2 6.5H5Z" fill="currentColor"/></svg>
+        </span>
+        VEFRIX
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#install">How to install</a>
+        <a class="nav-cta" href="#download">Get the app <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-grid wrap">
+        <div class="hero-content">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> Your money, made simpler</p>
+          <h1>VEFRIX - Smart Expense &amp; <span>Daily Diary Tracker</span></h1>
+          <p class="hero-copy">One simple place for everyday expenses, receipts, daily diaries and dues. Stay on top of your money without the everyday hassle.</p>
+          <div class="hero-actions">
+            <a class="button" href="https://github.com/vivekfaudjar/Vefrix/releases/download/vefrix/app-release.apk" aria-label="Download Vefrix app for Android APK">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 16v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Download App for Android (.APK)
+            </a>
+            <span class="trust-note">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Quick setup · Made for everyday life
+            </span>
+          </div>
+          <div class="hero-points" aria-label="App highlights">
+            <span><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h16M12 4v16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Track every day</span>
+            <span><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Stay organized</span>
+            <span><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18m5-14H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Know your balance</span>
+          </div>
+        </div>
+
+        <div class="visual" aria-label="Preview of the Vefrix expense tracker app">
+          <div class="visual-glow"></div>
+          <div class="float-card one">
+            <span class="float-icon" aria-hidden="true">✓</span>
+            <span class="float-text"><strong>Bill reminder</strong><small>Never miss a due date</small></span>
+          </div>
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><span>Good morning 👋</span><span class="phone-avatar">V</span></div>
+              <div class="balance-card">
+                <div class="balance-label">Total balance</div>
+                <div class="balance-value">₹ 24,580</div>
+                <div class="balance-bottom"><span>Income&nbsp; ₹32,000</span><span>Spent&nbsp; ₹7,420</span></div>
+              </div>
+              <div class="mini-heading"><span>Recent activity</span><span>View all</span></div>
+              <div class="transaction">
+                <span class="tx-icon">🛒</span>
+                <span class="tx-info"><strong>Groceries</strong><small>Today · Household</small></span>
+                <span class="tx-amount">− ₹860</span>
+              </div>
+              <div class="transaction">
+                <span class="tx-icon green">🥛</span>
+                <span class="tx-info"><strong>Milk diary</strong><small>Today · Daily entry</small></span>
+                <span class="tx-amount">− ₹60</span>
+              </div>
+              <div class="transaction">
+                <span class="tx-icon green">↗</span>
+                <span class="tx-info"><strong>Salary</strong><small>Yesterday · Income</small></span>
+                <span class="tx-amount">+ ₹32,000</span>
+              </div>
+              <div class="phone-nav"><span class="active">●<br>Ledger</span><span>◷<br>Diary</span><span>♧<br>Udhaar</span><span>▦<br>Bills</span></div>
+            </div>
+          </div>
+          <div class="float-card two">
+            <span class="float-icon" aria-hidden="true">₹</span>
+            <span class="float-text"><strong>Udhaar, in control</strong><small>Keep every balance clear</small></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section features" id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="section-kicker">Everything in one place</p>
+          <h2>Everyday money, less messy.</h2>
+          <p>From the small daily spends to the important reminders, Vefrix helps you keep it all together.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 4h14v16H5zM8 8h8M8 12h5m-5 4h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="m15.5 14.5 1.2 1.2 2.5-2.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>Smart Ledger &amp; Receipt OCR Scanner</h3>
+            <p>Keep income and expenses organized. Scan a receipt to pick up details and review them before saving.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8 4h8v3H8zM7 7h10l1 13H6L7 7Zm2 4v1m3-1v1m3-1v1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 5c1.4 1 1.4 2 0 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+            <h3>Milk &amp; RO Water Diary</h3>
+            <p>Log your daily milk and water expenses with a handy diary that keeps monthly totals in view.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>Bill Reminders &amp; Due Alerts</h3>
+            <p>Set bill reminders and get an alert before the due date, so important payments stay on your radar.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18m5-14H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+            <h3>Udhaar Tracker</h3>
+            <p>Track money lent or borrowed, record repayments, and see what balance is still open.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="install" id="install">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="section-kicker">Up and running in a minute</p>
+          <h2>How to install Vefrix</h2>
+          <p>Get started in three simple steps on your Android phone.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <span class="step-number">01</span>
+            <h3>Click Download APK</h3>
+            <p>Tap the download button to get the Vefrix APK file on your Android device.</p>
+          </article>
+          <article class="step">
+            <span class="step-number">02</span>
+            <h3>Open file &amp; Allow Install</h3>
+            <p>Open the downloaded file. If prompted, allow your browser or file manager to install apps.</p>
+          </article>
+          <article class="step">
+            <span class="step-number">03</span>
+            <h3>Enjoy Vefrix</h3>
+            <p>Open Vefrix and start keeping your expenses, diaries, bills and udhaar in one place.</p>
+          </article>
+        </div>
+        <div class="download-band" id="download">
+          <div>
+            <h2>Make money tracking a little easier.</h2>
+            <p>Your everyday expense and diary tracker is ready when you are.</p>
+          </div>
+          <a class="button" href="https://github.com/vivekfaudjar/Vefrix/releases/download/vefrix/app-release.apk">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 16v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download App for Android (.APK)
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner wrap">
+      <span class="footer-brand">VEFRIX</span>
+      <span>Smart money habits start with one small step.</span>
+    </div>
+  </footer>
+</body>
+</html>
